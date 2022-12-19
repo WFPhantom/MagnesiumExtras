@@ -13,10 +13,10 @@ public class GameRendererMixin
 {
 
     @Redirect(
-            at = @At(value = "FIELD", target = "Lnet/minecraft/client/Options;fov:D"),
+            at = @At(value = "FIELD", target = "net/minecraft/client/Options;fov:D"),
             method = "getFov")
     private double getFov(Options instance)
     {
-        return WiZoom.INSTANCE.changeFovBasedOnZoom(instance.fov);
+        return WiZoom.INSTANCE.changeFovBasedOnZoom(instance.fov().get());
     }
 }

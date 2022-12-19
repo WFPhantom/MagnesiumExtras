@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.util.Mth;
 //import org.lwjgl.glfw.GLFW;
+import net.minecraft.world.level.block.PressurePlateBlock;
 import vice.rubidium_extras.features.Keybinding.KeyboardInput;
 
 public enum WiZoom
@@ -16,10 +17,12 @@ public enum WiZoom
     private Double currentLevel;
     private Double defaultMouseSensitivity;
 
+
+
     public double changeFovBasedOnZoom(double fov)
     {
         Options gameOptions = MC.options;
-
+        double Sens = MC.options.sensitivity().get();
         if(currentLevel == null)
             currentLevel = defaultLevel;
 
@@ -29,7 +32,7 @@ public enum WiZoom
 
             if(defaultMouseSensitivity != null)
             {
-                gameOptions.sensitivity = defaultMouseSensitivity;
+                Sens = defaultMouseSensitivity;
                 defaultMouseSensitivity = null;
             }
 
@@ -37,14 +40,13 @@ public enum WiZoom
         }
 
         if(defaultMouseSensitivity == null)
-            defaultMouseSensitivity = gameOptions.sensitivity;
+            defaultMouseSensitivity = Sens;
 
         // Adjust mouse sensitivity in relation to zoom level.
         // (fov / currentLevel) / fov is a value between 0.02 (50x zoom)
         // and 1 (no zoom).
 
-        gameOptions.sensitivity =
-                defaultMouseSensitivity * (fov / currentLevel / fov);
+        Sens = defaultMouseSensitivity * (fov / currentLevel / fov);
 
         return fov / currentLevel;
     }

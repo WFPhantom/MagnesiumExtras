@@ -3,8 +3,10 @@ package vice.rubidium_extras.features.FrameCounter;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import java.lang.annotation.ElementType;
 
 @Mod.EventBusSubscriber(modid = "rubidium_extras", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class DebugOverlayImprovements
@@ -18,6 +20,5 @@ public class DebugOverlayImprovements
         var minecraft = Minecraft.getInstance();
         if (minecraft.options.renderFpsChart)
             event.setCanceled(true);
-
     }
 }
