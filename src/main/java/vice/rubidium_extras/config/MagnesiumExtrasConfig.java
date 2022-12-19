@@ -2,8 +2,6 @@ package vice.rubidium_extras.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.ForgeConfigSpec;
 import java.nio.file.Path;
 

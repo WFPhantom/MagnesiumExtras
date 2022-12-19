@@ -5,7 +5,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import vice.rubidium_extras.WiZoom;
 import vice.rubidium_extras.features.Keybinding.KeyboardInput;
 
 @Mixin(Inventory.class)

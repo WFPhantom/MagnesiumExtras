@@ -3,8 +3,6 @@ package vice.rubidium_extras;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.util.Mth;
-//import org.lwjgl.glfw.GLFW;
-import net.minecraft.world.level.block.PressurePlateBlock;
 import vice.rubidium_extras.features.Keybinding.KeyboardInput;
 
 public enum WiZoom
@@ -22,7 +20,7 @@ public enum WiZoom
     public double changeFovBasedOnZoom(double fov)
     {
         Options gameOptions = MC.options;
-        double Sens = MC.options.sensitivity().get();
+        double Sens = gameOptions.sensitivity().get();
         if(currentLevel == null)
             currentLevel = defaultLevel;
 

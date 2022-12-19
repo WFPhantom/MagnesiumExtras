@@ -2,7 +2,6 @@ package vice.rubidium_extras.mixins.Zoom;
 
 import net.minecraft.client.Options;
 import net.minecraft.client.renderer.GameRenderer;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
