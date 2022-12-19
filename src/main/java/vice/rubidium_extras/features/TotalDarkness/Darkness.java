@@ -15,7 +15,7 @@
  ******************************************************************************/
 package vice.rubidium_extras.features.TotalDarkness;
 
-
+import net.minecraft.client.Options;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.multiplayer.ClientLevel;

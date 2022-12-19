@@ -1,5 +1,5 @@
 package vice.rubidium_extras.mixins.performance;
-
+/*
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlBufferTarget;
 import me.jellysquid.mods.sodium.client.gl.buffer.GlMutableBuffer;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.time.Duration;
 import java.time.Instant;
 
-/*@Mixin(value = MultidrawChunkRenderBackend.class)
+@Mixin(value = MultidrawChunkRenderBackend.class)
 public abstract class MultiDrawChunkRenderBackendMixin
 {
     @Shadow @Final private ChunkRegionManager<MultidrawGraphicsState> bufferManager;

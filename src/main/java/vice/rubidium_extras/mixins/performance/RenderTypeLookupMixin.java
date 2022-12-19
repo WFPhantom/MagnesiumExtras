@@ -1,5 +1,5 @@
 package vice.rubidium_extras.mixins.performance;
-
+/*
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
 import java.util.function.Predicate;
-/*
+
 @Mixin(value = ItemBlockRenderTypes.class)
 public class RenderTypeLookupMixin
 {

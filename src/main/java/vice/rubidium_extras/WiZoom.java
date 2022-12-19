@@ -3,7 +3,7 @@ package vice.rubidium_extras;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.util.Mth;
-import org.lwjgl.glfw.GLFW;
+//import org.lwjgl.glfw.GLFW;
 import vice.rubidium_extras.features.Keybinding.KeyboardInput;
 
 public enum WiZoom
@@ -42,6 +42,7 @@ public enum WiZoom
         // Adjust mouse sensitivity in relation to zoom level.
         // (fov / currentLevel) / fov is a value between 0.02 (50x zoom)
         // and 1 (no zoom).
+
         gameOptions.sensitivity =
                 defaultMouseSensitivity * (fov / currentLevel / fov);
 
