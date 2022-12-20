@@ -15,6 +15,8 @@
  ******************************************************************************/
 package vice.rubidium_extras.features.TotalDarkness;
 
+import me.jellysquid.mods.sodium.client.gui.options.binding.compat.VanillaBooleanOptionBinding;
+import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -28,7 +30,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vice.rubidium_extras.config.MagnesiumExtrasConfig;
@@ -136,7 +137,6 @@ public class Darkness
 			} else {
 				enabled = true;
 			}
-
 			final float dimSkyFactor = Darkness.skyFactor(world);
 			final float ambient = world.getSkyDarken(1.0F);
 			final DimensionType dim = world.dimensionType();
@@ -171,7 +171,6 @@ public class Darkness
 						blockFactor = 1f - blockIndex / 15f;
 						blockFactor = 1 - blockFactor * blockFactor * blockFactor * blockFactor;
 					}
-
 					final float blockBase = blockFactor * dim.brightness(blockIndex) * (prevFlicker * 0.1F + 1.5F);
 					min = 0.4f * blockFactor;
 					final float blockGreen = blockBase * ((blockBase * (1 - min) + min) * (1 - min) + min);
@@ -206,7 +205,9 @@ public class Darkness
 						blue = 1.0F;
 					}
 
-					final float gamma = (float) client.options.gamma * f;
+					OptionInstance<Double> optionInstance = client.options.gamma();
+					double value = optionInstance.get();
+					final float gamma = (float) value;
 					float invRed = 1.0F - red;
 					float invGreen = 1.0F - green;
 					float invBlue = 1.0F - blue;
