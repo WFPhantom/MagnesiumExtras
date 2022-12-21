@@ -9,6 +9,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.MinecraftOptionsStorage;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
+import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
@@ -28,11 +29,13 @@ import vice.rubidium_extras.mixins.BorderlessFullscreen.MainWindowAccessor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Mixin(SodiumGameOptionPages.class)
 public class SodiumGameOptionsMixin
 {
     @Shadow @Final private static SodiumOptionsStorage sodiumOpts;
+
 
     //@Inject(at = @At("HEAD"), method = "experimental", remap = false, cancellable = true)
 
@@ -247,17 +250,21 @@ public class SodiumGameOptionsMixin
                 .setBinding(
                         (opts, value) -> {
                             MagnesiumExtrasConfig.fullScreenMode.set(value);
-                            opts.fullscreen = value != MagnesiumExtrasConfig.FullscreenMode.WINDOWED;
 
                             Minecraft client = Minecraft.getInstance();
                             Window window = client.getWindow();
-                            if (window != null && window.isFullscreen() != opts.fullscreen)
+                            OptionInstance<Boolean> optionInstance = client.options.fullscreen();
+                            boolean Fullscreen = optionInstance.get();
+
+                            Fullscreen = value != MagnesiumExtrasConfig.FullscreenMode.WINDOWED;
+
+                            if (window != null && window.isFullscreen() != Fullscreen)
                             {
                                 window.toggleFullScreen();
-                                opts.fullscreen = window.isFullscreen();
+                                Fullscreen = window.isFullscreen();
                             }
 
-                            if (window != null && opts.fullscreen)
+                            if (window != null && Fullscreen)
                             {
                                 ((MainWindowAccessor) (Object) window).setDirty(true);
                                 window.changeFullscreenVideoMode();
