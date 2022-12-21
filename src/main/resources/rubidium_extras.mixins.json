@@ -18,11 +18,6 @@
     "FrameCounter.FpsAccessorMixin",
     "FrameCounter.FrameCounterMixin",
     "SodiumConfig.SodiumGUIMixin",
-    "TotalDarkness.MixinGameRenderer",
-    "TotalDarkness.MixinLightmapTextureManager",
-    "TotalDarkness.MixinNativeImageBackedTexture",
-    "TotalDarkness.MixinTheEndDimension",
-    "TotalDarkness.MixinTheNetherDimension",
     "Zoom.GameRendererMixin",
     "Zoom.MouseMixin"
   ]
