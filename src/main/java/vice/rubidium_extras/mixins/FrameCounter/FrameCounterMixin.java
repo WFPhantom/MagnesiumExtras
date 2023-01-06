@@ -13,8 +13,6 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
-import org.lwjgl.opengl.GL11;
-
 @Mixin(ForgeGui.class)
 public class FrameCounterMixin
 {
