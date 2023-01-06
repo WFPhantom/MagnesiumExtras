@@ -13,6 +13,8 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
+import org.lwjgl.opengl.GL11;
+
 @Mixin(ForgeGui.class)
 public class FrameCounterMixin
 {
@@ -59,16 +61,18 @@ public class FrameCounterMixin
 
         int drawColor = ((textAlpha & 0xFF) << 24) | textColor;
 
-//        if (client.getWindow().getGuiScale() > 3)
-//        {
-//            GL11.glPushMatrix();
-//            GL11.glScalef(fontScale, fontScale, fontScale);
-//            client.font.drawShadow(matrixStack, displayString, textPos, textPos, drawColor);
-//            GL11.glPopMatrix();
-//        }
-//        else
-//        {
+/*
+        if (client.getWindow().getGuiScale() > 3)
+        {
+            GL11.glPushMatrix();
+            GL11.glScalef(fontScale, fontScale, fontScale);
             client.font.drawShadow(matrixStack, displayString, textPos, textPos, drawColor);
+            GL11.glPopMatrix();
+        }
+        else
+        {
+*/
+        client.font.drawShadow(matrixStack, displayString, textPos, textPos, drawColor);
         //}
     }
 

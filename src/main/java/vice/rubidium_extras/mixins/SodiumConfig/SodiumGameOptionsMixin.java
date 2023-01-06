@@ -9,7 +9,6 @@ import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.MinecraftOptionsStorage;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
-import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
@@ -29,13 +28,11 @@ import vice.rubidium_extras.mixins.BorderlessFullscreen.MainWindowAccessor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Mixin(SodiumGameOptionPages.class)
 public class SodiumGameOptionsMixin
 {
     @Shadow @Final private static SodiumOptionsStorage sodiumOpts;
-
 
     //@Inject(at = @At("HEAD"), method = "experimental", remap = false, cancellable = true)
 
@@ -51,12 +48,14 @@ public class SodiumGameOptionsMixin
     )
     private static void Inject(CallbackInfoReturnable<OptionPage> cir, List<OptionGroup> groups)
     {
-//        groups.removeIf((optionGroup) ->
-//            optionGroup
-//                    .getOptions()
-//                    .stream()
-//                    .anyMatch((option) -> Objects.equals(option.getName(), "Display FPS"))
-//        );
+/*
+        groups.removeIf((optionGroup) ->
+            optionGroup
+                    .getOptions()
+                    .stream()
+                    .anyMatch((option) -> Objects.equals(option.getName(), "Display FPS"))
+        );
+*/
 
         Option<MagnesiumExtrasConfig.Complexity> displayFps =  OptionImpl.createBuilder(MagnesiumExtrasConfig.Complexity.class, sodiumOpts)
                 .setName(Component.nullToEmpty("Display FPS"))
@@ -90,20 +89,21 @@ public class SodiumGameOptionsMixin
                 .add(displayFpsPos)
                 .build());
 
-
-//        Option<MagnesiumExtrasConfig.Quality> fadeInQuality =  OptionImpl.createBuilder(MagnesiumExtrasConfig.Quality.class, sodiumOpts)
-//                .setName(Component.nullToEmpty("Chunk Fade In Quality"))
-//                .setTooltip(Component.nullToEmpty("Controls how fast chunks fade in. No performance hit, Fancy simply takes longer, but looks a bit cooler."))
-//                .setControl((option) -> new CyclingControl<>(option, MagnesiumExtrasConfig.Quality.class, new Component[] {
-//                        Component.nullToEmpty("Off"),
-//                        Component.nullToEmpty("Fast"),
-//                        Component.nullToEmpty("Fancy")
-//                }))
-//                .setBinding(
-//                        (opts, value) -> MagnesiumExtrasConfig.fadeInQuality.set(value.toString()),
-//                        (opts) -> MagnesiumExtrasConfig.Quality.valueOf(MagnesiumExtrasConfig.fadeInQuality.get()))
-//                .setImpact(OptionImpact.LOW)
-//                .build();
+/*
+        Option<MagnesiumExtrasConfig.Quality> fadeInQuality =  OptionImpl.createBuilder(MagnesiumExtrasConfig.Quality.class, sodiumOpts)
+                .setName(Component.nullToEmpty("Chunk Fade In Quality"))
+                .setTooltip(Component.nullToEmpty("Controls how fast chunks fade in. No performance hit, Fancy simply takes longer, but looks a bit cooler."))
+                .setControl((option) -> new CyclingControl<>(option, MagnesiumExtrasConfig.Quality.class, new Component[] {
+                        Component.nullToEmpty("Off"),
+                        Component.nullToEmpty("Fast"),
+                        Component.nullToEmpty("Fancy")
+                }))
+                .setBinding(
+                        (opts, value) -> MagnesiumExtrasConfig.fadeInQuality.set(value.toString()),
+                        (opts) -> MagnesiumExtrasConfig.Quality.valueOf(MagnesiumExtrasConfig.fadeInQuality.get()))
+                .setImpact(OptionImpact.LOW)
+                .build();
+*/
 
         OptionImpl<SodiumGameOptions, Boolean> fog = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(Component.nullToEmpty("Enable fog"))
@@ -145,9 +145,6 @@ public class SodiumGameOptionsMixin
                 .build());
 
 
-
-
-
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
                 .setName(Component.nullToEmpty("Enable Max Entity Distance"))
                 .setTooltip(Component.nullToEmpty("Toggles off entity culling."))
@@ -164,9 +161,6 @@ public class SodiumGameOptionsMixin
                 .add(enableDistanceChecks)
                 .build()
         );
-
-
-
 
 
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
@@ -196,9 +190,6 @@ public class SodiumGameOptionsMixin
                 .add(maxEntityDistanceVertical)
                 .build()
         );
-
-
-
 
 
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
@@ -250,21 +241,17 @@ public class SodiumGameOptionsMixin
                 .setBinding(
                         (opts, value) -> {
                             MagnesiumExtrasConfig.fullScreenMode.set(value);
+                            opts.fullscreen.set(value != MagnesiumExtrasConfig.FullscreenMode.WINDOWED);
 
                             Minecraft client = Minecraft.getInstance();
                             Window window = client.getWindow();
-                            OptionInstance<Boolean> optionInstance = client.options.fullscreen();
-                            boolean Fullscreen = optionInstance.get();
-
-                            Fullscreen = value != MagnesiumExtrasConfig.FullscreenMode.WINDOWED;
-
-                            if (window != null && window.isFullscreen() != Fullscreen)
+                            if (window != null && window.isFullscreen() != opts.fullscreen.get())
                             {
                                 window.toggleFullScreen();
-                                Fullscreen = window.isFullscreen();
+                                opts.fullscreen.set(window.isFullscreen());
                             }
 
-                            if (window != null && Fullscreen)
+                            if (window != null && opts.fullscreen.get())
                             {
                                 ((MainWindowAccessor) (Object) window).setDirty(true);
                                 window.changeFullscreenVideoMode();

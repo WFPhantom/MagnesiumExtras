@@ -1,6 +1,6 @@
 package vice.rubidium_extras.mixins.SodiumConfig;
 
-
+/*
 import com.google.common.collect.ImmutableList;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
@@ -21,7 +21,7 @@ import vice.rubidium_extras.config.MagnesiumExtrasConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+
 @Pseudo
 @Mixin(SodiumOptionsGUI.class)
 public abstract class ZoomSettingsPage

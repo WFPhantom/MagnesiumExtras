@@ -6,18 +6,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-/*
 public class KeybindingRegistry {
     @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> RegisterKeyMappingsEvent(KeyboardInput.zoomKey));
-    }
-}
-*/
-public class KeybindingRegistry {
-    @SubscribeEvent
-    public static void onKeyBindRegister(RegisterKeyMappingsEvent event){
-        KeybindingRegistry.onKeyBindRegister(event);
+    public static void registerKeys(RegisterKeyMappingsEvent event) {
         event.register(KeyboardInput.zoomKey);
     }
 }
